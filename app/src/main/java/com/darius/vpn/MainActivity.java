@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
         scroll.addView(panneau);
 
         racine.addView(scroll, new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.MATCH_PARENT, 1
+            0, LinearLayout.LinearLayout.LayoutParams.MATCH_PARENT, 1
         ));
 
         menuOuvert = true;
