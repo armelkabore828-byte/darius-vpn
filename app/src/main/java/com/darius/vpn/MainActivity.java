@@ -4,90 +4,88 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.view.Gravity;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 
 public class MainActivity extends Activity {
+
+    LinearLayout menu;
+
+    void ajouterTitre(String texte) {
+        TextView titre = new TextView(this);
+        titre.setText(texte);
+        titre.setTextColor(Color.RED);
+        titre.setTextSize(18);
+        titre.setPadding(12, 25, 12, 12);
+        menu.addView(titre);
+    }
+
+    void ajouterBouton(String texte) {
+        Button bouton = new Button(this);
+        bouton.setText(texte);
+        bouton.setTextColor(Color.WHITE);
+        bouton.setBackgroundColor(Color.rgb(35, 35, 35));
+        bouton.setOnClickListener(v ->
+            Toast.makeText(this,
+                texte + " : fonction à développer",
+                Toast.LENGTH_SHORT).show()
+        );
+        menu.addView(bouton);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setGravity(Gravity.CENTER);
-        layout.setPadding(30, 30, 30, 30);
-        layout.setBackgroundColor(Color.rgb(15, 15, 15));
+        ScrollView scroll = new ScrollView(this);
+        menu = new LinearLayout(this);
+        menu.setOrientation(LinearLayout.VERTICAL);
+        menu.setPadding(20, 20, 20, 20);
+        menu.setBackgroundColor(Color.rgb(15, 15, 15));
 
-        TextView titre = new TextView(this);
-        titre.setText("DARIUS VPN");
-        titre.setTextColor(Color.RED);
-        titre.setTextSize(32);
-        titre.setGravity(Gravity.CENTER);
+        TextView nom = new TextView(this);
+        nom.setText("DARIUS VPN");
+        nom.setTextColor(Color.RED);
+        nom.setTextSize(32);
+        nom.setGravity(Gravity.CENTER);
+        menu.addView(nom);
 
         TextView statut = new TextView(this);
         statut.setText("VPN NON CONNECTÉ");
         statut.setTextColor(Color.WHITE);
         statut.setTextSize(18);
+        statut.setGravity(Gravity.CENTER);
+        menu.addView(statut);
 
-        TextView protocoles = new TextView(this);
-        protocoles.setText("CHOISIR UN PROTOCOLE");
-        protocoles.setTextColor(Color.WHITE);
-        protocoles.setTextSize(18);
+        ajouterTitre("NAVIGATION");
+        ajouterBouton("Accueil");
+        ajouterBouton("Profils");
+        ajouterBouton("Réglages");
+        ajouterBouton("Guide");
 
-        Button vmess = new Button(this);
-        vmess.setText("VMESS");
+        ajouterTitre("AJOUTER MANUELLEMENT");
+        ajouterBouton("V2Ray - VMess");
+        ajouterBouton("V2Ray - VLESS");
+        ajouterBouton("SSH");
+        ajouterBouton("Hysteria2");
+        ajouterBouton("UDP Custom");
+        ajouterBouton("Psiphon");
+        ajouterBouton("OpenVPN");
 
-        Button vless = new Button(this);
-        vless.setText("VLESS");
+        ajouterTitre("OUTILS");
+        ajouterBouton("Recherche IP");
+        ajouterBouton("Consommation de données");
+        ajouterBouton("Ping automatique");
+        ajouterBouton("ID matériel");
+        ajouterBouton("Vérificateur de réponse");
+        ajouterBouton("Test de vitesse");
+        ajouterBouton("Mon IP");
+        ajouterBouton("Testeur de ports");
+        ajouterBouton("Partager l'application");
 
-        EditText lien = new EditText(this);
-        lien.setHint("Coller un lien VMess ou VLESS");
-        lien.setTextColor(Color.WHITE);
-        lien.setHintTextColor(Color.GRAY);
+        ajouterTitre("INFORMATIONS");
+        ajouterBouton("À propos");
 
-        Button ajouter = new Button(this);
-        ajouter.setText("AJOUTER LE LIEN");
-
-        Button fichier = new Button(this);
-        fichier.setText("IMPORTER UN FICHIER");
-
-        Button qr = new Button(this);
-        qr.setText("SCANNER UN QR CODE");
-
-        vmess.setOnClickListener(v ->
-            Toast.makeText(this, "Protocole VMess choisi", Toast.LENGTH_SHORT).show()
-        );
-
-        vless.setOnClickListener(v ->
-            Toast.makeText(this, "Protocole VLESS choisi", Toast.LENGTH_SHORT).show()
-        );
-
-        ajouter.setOnClickListener(v ->
-            Toast.makeText(this, "Fonction à connecter prochainement", Toast.LENGTH_SHORT).show()
-        );
-
-        fichier.setOnClickListener(v ->
-            Toast.makeText(this, "Importation à programmer", Toast.LENGTH_SHORT).show()
-        );
-
-        qr.setOnClickListener(v ->
-            Toast.makeText(this, "Scanner QR à programmer", Toast.LENGTH_SHORT).show()
-        );
-
-        layout.addView(titre);
-        layout.addView(statut);
-        layout.addView(protocoles);
-        layout.addView(vmess);
-        layout.addView(vless);
-        layout.addView(lien);
-        layout.addView(ajouter);
-        layout.addView(fichier);
-        layout.addView(qr);
-
-        setContentView(layout);
+        scroll.addView(menu);
+        setContentView(scroll);
     }
 }
